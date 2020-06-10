@@ -1,0 +1,7 @@
+{
+  "name": "kladapplication",
+  "integrations": {
+    "cordova": {}
+  },
+  "type": "angular"
+}

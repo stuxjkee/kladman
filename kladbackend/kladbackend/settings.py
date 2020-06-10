@@ -27,10 +27,27 @@ DEBUG = True
 
 ALLOWED_HOSTS = []
 
+#Rest
+REST_FRAMEWORK = {
+    'DEFAULT_FILTER_BACKENDS': (
+        'django_filters.rest_framework.DjangoFilterBackend',
+    ),
+    'DEFAULT_AUTHENTICATION_CLASSES': (
+        'rest_framework.authentication.BasicAuthentication',
+    ),
+    'DEFAULT_RENDERER_CLASSES': (
+        'rest_framework.renderers.JSONRenderer',
+        'rest_framework.renderers.BrowsableAPIRenderer',
+    ),
+    'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.PageNumberPagination',
+    'PAGE_SIZE': 20,
+}
 
 # Application definition
 
 INSTALLED_APPS = [
+    'rest_framework_docs',
+    'rest_framework',
     'jet',
     'backoffice.apps.BackOfficeConfig',
     'django.contrib.admin',
