@@ -1,5 +1,5 @@
 from django.apps import AppConfig
 
 
-class BackofficeConfig(AppConfig):
+class BackOfficeConfig(AppConfig):
     name = 'backoffice'

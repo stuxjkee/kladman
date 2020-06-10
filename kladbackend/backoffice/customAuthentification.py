@@ -1,7 +1,7 @@
 from django.contrib.auth.models import User 
 from .libs.hashers import * 
 from .models import User 
-class CustomAuthentification(object): 
+class CustomAuthentification(object):
     def authenticate(self, username=None, password=None): 
         if username: 
             try: 
@@ -19,4 +19,4 @@ class CustomAuthentification(object):
         try: 
             return User.objects.get(pk=user_id)
         except User.DoesNotExists:
-            return None 
+            return None

@@ -31,6 +31,7 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
+    'jet',
     'backoffice.apps.BackOfficeConfig',
     'django.contrib.admin',
     'django.contrib.auth',
@@ -74,10 +75,26 @@ WSGI_APPLICATION = 'kladbackend.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/3.0/ref/settings/#databases
 
+POSTGRESQL_ADDON_URI = os.getenv("POSTGRESQL_ADDON_URI")
+POSTGRESQL_ADDON_PORT = os.getenv("POSTGRESQL_ADDON_PORT")
+POSTGRESQL_ADDON_HOST = os.getenv("POSTGRESQL_ADDON_HOST")
+POSTGRESQL_ADDON_DB = os.getenv("POSTGRESQL_ADDON_DB")
+POSTGRESQL_ADDON_PASSWORD = os.getenv("POSTGRESQL_ADDON_PASSWORD")
+POSTGRESQL_ADDON_USER = os.getenv("POSTGRESQL_ADDON_USER")
+STATIC_URL_PREFIX  = os.getenv("STATIC_URL_PREFIX")
+MEDIA_ROOT=os.getenv("APP_HOME")+os.getenv("STATIC_URL_PREFIX")+'/storage/'
+MEDIA_URL = os.getenv('STATIC_URL_PREFIX')+"/storage/"
+STATIC_ROOT = os.getenv("APP_HOME")+os.getenv("STATIC_URL_PREFIX")+'/static/static/' 
+
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+        'ENGINE': 'django.contrib.gis.db.backends.postgis', #''django.db.backends.postgresql_psycopg2',  #'django.db.backends.mysql',
+        'NAME': POSTGRESQL_ADDON_DB,
+        'USER': POSTGRESQL_ADDON_USER,
+        'PASSWORD': POSTGRESQL_ADDON_PASSWORD,
+        'HOST': POSTGRESQL_ADDON_HOST,
+        'PORT': POSTGRESQL_ADDON_PORT,
+        'CONN_MAX_AGE': 5, 
     }
 }
 
@@ -124,5 +141,7 @@ STATIC_URL = '/static/'
 AUTH_USER_MODEL = 'backoffice.User'
 AUTHENTICATION_BACKENDS = (
     'django.contrib.auth.backends.ModelBackend', 
-    'backoffice.customAuthentification.customAuthentification'
+    'backoffice.customAuthentification.CustomAuthentification'
 )
+
+

@@ -1,0 +1,5 @@
+{ "deploy": {
+   "module": "kladbackend_wsgi",
+    "static": "/static/"
+  }
+}
